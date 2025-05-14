@@ -8,7 +8,7 @@ const testimonials = [
     id: 1,
     name: 'Sarah Johnson',
     position: 'Bride-to-be',
-    comment: 'I couldn't be happier with my engagement ring from Fancy Moissanite. The craftsmanship is incredible, and the stone sparkles in any light. My fiancé was impressed with the quality and price.',
+    comment: "I couldn't be happier with my engagement ring from Fancy Moissanite. The craftsmanship is incredible, and the stone sparkles in any light. My fiancé was impressed with the quality and price.",
     rating: 5,
     image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1287&auto=format&fit=crop'
   },
@@ -16,7 +16,7 @@ const testimonials = [
     id: 2,
     name: 'Michael Chen',
     position: 'Anniversary Gift',
-    comment: 'For our 10th anniversary, I wanted something special. The custom design process was so personal, and the final piece exceeded all expectations. My wife tears up every time she puts it on.',
+    comment: "For our 10th anniversary, I wanted something special. The custom design process was so personal, and the final piece exceeded all expectations. My wife tears up every time she puts it on.",
     rating: 5,
     image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1287&auto=format&fit=crop'
   },
@@ -24,7 +24,7 @@ const testimonials = [
     id: 3,
     name: 'Emily Rodriguez',
     position: 'Jewelry Collector',
-    comment: 'As someone who collects fine jewelry, I'm extremely particular about quality. Fancy Moissanite's pieces stand alongside my most expensive items. The ethical sourcing is a significant bonus.',
+    comment: "As someone who collects fine jewelry, I'm extremely particular about quality. Fancy Moissanite's pieces stand alongside my most expensive items. The ethical sourcing is a significant bonus.",
     rating: 5,
     image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1288&auto=format&fit=crop'
   },
@@ -32,7 +32,7 @@ const testimonials = [
     id: 4,
     name: 'David Thompson',
     position: 'Returning Customer',
-    comment: 'I've purchased three pieces now, and each one has been perfect. The customer service team went above and beyond to help me find exactly what I was looking for. Highly recommend!',
+    comment: "I've purchased three pieces now, and each one has been perfect. The customer service team went above and beyond to help me find exactly what I was looking for. Highly recommend!",
     rating: 5,
     image: 'https://images.unsplash.com/photo-1566492031773-4f4e44671857?q=80&w=1287&auto=format&fit=crop'
   }
