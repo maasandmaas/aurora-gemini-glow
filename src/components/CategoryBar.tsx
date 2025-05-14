@@ -85,17 +85,20 @@ const CategoryBar = () => {
             </div>
           ))}
         </div>
-        
-        {/* Dropdown Content */}
-        <AnimatePresence>
-          {activeCategory && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="relative w-full border-t border-gold-100 overflow-hidden"
-            >
+      </div>
+      
+      {/* Dropdown Content - Moved outside to prevent displacing content */}
+      <AnimatePresence>
+        {activeCategory && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="fixed left-0 right-0 bg-white border-t border-gold-100 shadow-md z-40"
+            style={{ top: 'calc(var(--header-height, 80px) + 52px)' }}
+          >
+            <div className="container mx-auto">
               {categories.map(category => 
                 category.name === activeCategory && (
                   <div key={category.name} className="grid grid-cols-1 md:grid-cols-3 gap-4 py-8 px-4">
@@ -156,10 +159,10 @@ const CategoryBar = () => {
                   </div>
                 )
               )}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

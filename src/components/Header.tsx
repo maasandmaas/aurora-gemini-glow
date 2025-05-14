@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { ChevronDown, Search, ShoppingCart, User, Heart } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { 
   NavigationMenu,
   NavigationMenuContent,
@@ -16,6 +16,7 @@ const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,6 +26,11 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Scroll to top when route changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   return (
     <header
@@ -75,18 +81,14 @@ const Header = () => {
               Home
             </Link>
             
-            <div 
-              className="relative group"
-              onMouseEnter={() => setActiveSubmenu('shop')}
-              onMouseLeave={() => setActiveSubmenu(null)}
-            >
+            <div className="relative group">
               <Link to="/shop" className="font-medium tracking-wide hover:text-gold-600 transition-colors flex items-center">
                 Shop
                 <ChevronDown size={16} className="ml-1" />
               </Link>
               
-              {/* Shop Dropdown - only shows on hover */}
-              <div className={`absolute top-full left-0 mt-2 w-[400px] md:w-[600px] bg-white shadow-lg border border-gold-100 rounded-md overflow-hidden transition-opacity duration-300 ${activeSubmenu === 'shop' ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+              {/* Shop Dropdown - improved positioning */}
+              <div className="absolute left-0 mt-2 w-[400px] md:w-[600px] bg-white shadow-lg border border-gold-100 rounded-md overflow-hidden transition-opacity duration-300 opacity-0 invisible group-hover:opacity-100 group-hover:visible z-50">
                 <div className="grid gap-3 p-4 lg:grid-cols-2">
                   <div>
                     <h4 className="font-serif text-lg font-medium mb-2 text-gold-600">Categories</h4>
@@ -108,18 +110,14 @@ const Header = () => {
               </div>
             </div>
             
-            <div 
-              className="relative group"
-              onMouseEnter={() => setActiveSubmenu('collections')}
-              onMouseLeave={() => setActiveSubmenu(null)}
-            >
+            <div className="relative group">
               <Link to="/collections" className="font-medium tracking-wide hover:text-gold-600 transition-colors flex items-center">
                 Collections
                 <ChevronDown size={16} className="ml-1" />
               </Link>
               
-              {/* Collections Dropdown - only shows on hover */}
-              <div className={`absolute top-full left-0 mt-2 w-[400px] md:w-[600px] bg-white shadow-lg border border-gold-100 rounded-md overflow-hidden transition-opacity duration-300 ${activeSubmenu === 'collections' ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+              {/* Collections Dropdown - improved positioning */}
+              <div className="absolute left-0 mt-2 w-[400px] md:w-[600px] bg-white shadow-lg border border-gold-100 rounded-md overflow-hidden transition-opacity duration-300 opacity-0 invisible group-hover:opacity-100 group-hover:visible z-50">
                 <div className="grid gap-3 p-4 lg:grid-cols-2">
                   <div>
                     <h4 className="font-serif text-lg font-medium mb-2 text-gold-600">Our Collections</h4>
