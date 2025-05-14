@@ -15,6 +15,7 @@ import {
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -69,85 +70,85 @@ const Header = () => {
           </div>
 
           {/* Main Navigation (Desktop) */}
-          <NavigationMenu className="hidden lg:flex">
-            <NavigationMenuList>
-              <NavigationMenuItem>
-                <NavigationMenuLink asChild>
-                  <Link to="/" className="font-medium tracking-wide hover:text-gold-600 transition-colors p-2 text-sm">
-                    Home
-                  </Link>
-                </NavigationMenuLink>
-              </NavigationMenuItem>
+          <div className="hidden lg:flex items-center space-x-8">
+            <Link to="/" className="font-medium tracking-wide hover:text-gold-600 transition-colors">
+              Home
+            </Link>
+            
+            <div 
+              className="relative group"
+              onMouseEnter={() => setActiveSubmenu('shop')}
+              onMouseLeave={() => setActiveSubmenu(null)}
+            >
+              <Link to="/shop" className="font-medium tracking-wide hover:text-gold-600 transition-colors flex items-center">
+                Shop
+                <ChevronDown size={16} className="ml-1" />
+              </Link>
               
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="font-medium tracking-wide hover:text-gold-600 transition-colors p-2 text-sm bg-transparent hover:bg-transparent">
-                  Shop
-                </NavigationMenuTrigger>
-                <NavigationMenuContent className="bg-white shadow-lg border border-gold-100">
-                  <div className="grid gap-3 p-4 w-[400px] md:w-[600px] lg:grid-cols-2">
-                    <div>
-                      <h4 className="font-serif text-lg font-medium mb-2 text-gold-600">Categories</h4>
-                      <div className="grid grid-cols-2 gap-2">
-                        <Link to="/shop/rings" className="text-sm p-2 hover:bg-gold-50 rounded-md">Rings</Link>
-                        <Link to="/shop/necklaces" className="text-sm p-2 hover:bg-gold-50 rounded-md">Necklaces</Link>
-                        <Link to="/shop/earrings" className="text-sm p-2 hover:bg-gold-50 rounded-md">Earrings</Link>
-                        <Link to="/shop/bracelets" className="text-sm p-2 hover:bg-gold-50 rounded-md">Bracelets</Link>
-                      </div>
-                    </div>
-                    <div className="hidden md:block">
-                      <img 
-                        src="https://fancymoissanite.com/wp-content/uploads/ancy-2.png" 
-                        alt="Featured Collection" 
-                        className="rounded-md h-full object-cover"
-                      />
+              {/* Shop Dropdown - only shows on hover */}
+              <div className={`absolute top-full left-0 mt-2 w-[400px] md:w-[600px] bg-white shadow-lg border border-gold-100 rounded-md overflow-hidden transition-opacity duration-300 ${activeSubmenu === 'shop' ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+                <div className="grid gap-3 p-4 lg:grid-cols-2">
+                  <div>
+                    <h4 className="font-serif text-lg font-medium mb-2 text-gold-600">Categories</h4>
+                    <div className="grid grid-cols-2 gap-2">
+                      <Link to="/shop/rings" className="text-sm p-2 hover:bg-gold-50 rounded-md">Rings</Link>
+                      <Link to="/shop/necklaces" className="text-sm p-2 hover:bg-gold-50 rounded-md">Necklaces</Link>
+                      <Link to="/shop/earrings" className="text-sm p-2 hover:bg-gold-50 rounded-md">Earrings</Link>
+                      <Link to="/shop/bracelets" className="text-sm p-2 hover:bg-gold-50 rounded-md">Bracelets</Link>
                     </div>
                   </div>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
+                  <div className="hidden md:block">
+                    <img 
+                      src="https://fancymoissanite.com/wp-content/uploads/ancy-2.png" 
+                      alt="Featured Collection" 
+                      className="rounded-md h-full object-cover"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div 
+              className="relative group"
+              onMouseEnter={() => setActiveSubmenu('collections')}
+              onMouseLeave={() => setActiveSubmenu(null)}
+            >
+              <Link to="/collections" className="font-medium tracking-wide hover:text-gold-600 transition-colors flex items-center">
+                Collections
+                <ChevronDown size={16} className="ml-1" />
+              </Link>
               
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="font-medium tracking-wide hover:text-gold-600 transition-colors p-2 text-sm bg-transparent hover:bg-transparent">
-                  Collections
-                </NavigationMenuTrigger>
-                <NavigationMenuContent className="bg-white shadow-lg border border-gold-100">
-                  <div className="grid gap-3 p-4 w-[400px] md:w-[600px] lg:grid-cols-2">
-                    <div>
-                      <h4 className="font-serif text-lg font-medium mb-2 text-gold-600">Our Collections</h4>
-                      <div className="grid grid-cols-2 gap-2">
-                        <Link to="/collections/wedding" className="text-sm p-2 hover:bg-gold-50 rounded-md">Wedding</Link>
-                        <Link to="/collections/engagement" className="text-sm p-2 hover:bg-gold-50 rounded-md">Engagement</Link>
-                        <Link to="/collections/anniversary" className="text-sm p-2 hover:bg-gold-50 rounded-md">Anniversary</Link>
-                        <Link to="/collections/custom" className="text-sm p-2 hover:bg-gold-50 rounded-md">Custom</Link>
-                      </div>
-                    </div>
-                    <div className="hidden md:block">
-                      <img 
-                        src="https://fancymoissanite.com/wp-content/uploads/Fancy.png" 
-                        alt="Featured Collection" 
-                        className="rounded-md h-full object-cover"
-                      />
+              {/* Collections Dropdown - only shows on hover */}
+              <div className={`absolute top-full left-0 mt-2 w-[400px] md:w-[600px] bg-white shadow-lg border border-gold-100 rounded-md overflow-hidden transition-opacity duration-300 ${activeSubmenu === 'collections' ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+                <div className="grid gap-3 p-4 lg:grid-cols-2">
+                  <div>
+                    <h4 className="font-serif text-lg font-medium mb-2 text-gold-600">Our Collections</h4>
+                    <div className="grid grid-cols-2 gap-2">
+                      <Link to="/collections/wedding" className="text-sm p-2 hover:bg-gold-50 rounded-md">Wedding</Link>
+                      <Link to="/collections/engagement" className="text-sm p-2 hover:bg-gold-50 rounded-md">Engagement</Link>
+                      <Link to="/collections/anniversary" className="text-sm p-2 hover:bg-gold-50 rounded-md">Anniversary</Link>
+                      <Link to="/collections/custom" className="text-sm p-2 hover:bg-gold-50 rounded-md">Custom</Link>
                     </div>
                   </div>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-              
-              <NavigationMenuItem>
-                <NavigationMenuLink asChild>
-                  <Link to="/about" className="font-medium tracking-wide hover:text-gold-600 transition-colors p-2 text-sm">
-                    About
-                  </Link>
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-              
-              <NavigationMenuItem>
-                <NavigationMenuLink asChild>
-                  <Link to="/contact" className="font-medium tracking-wide hover:text-gold-600 transition-colors p-2 text-sm">
-                    Contact
-                  </Link>
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-            </NavigationMenuList>
-          </NavigationMenu>
+                  <div className="hidden md:block">
+                    <img 
+                      src="https://fancymoissanite.com/wp-content/uploads/Fancy.png" 
+                      alt="Featured Collection" 
+                      className="rounded-md h-full object-cover"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <Link to="/about" className="font-medium tracking-wide hover:text-gold-600 transition-colors">
+              About
+            </Link>
+            
+            <Link to="/contact" className="font-medium tracking-wide hover:text-gold-600 transition-colors">
+              Contact
+            </Link>
+          </div>
 
           {/* Right Icons */}
           <div className="flex items-center space-x-4">

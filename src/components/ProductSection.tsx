@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import ProductCard from './ProductCard';
 import ProductSkeleton from './ProductSkeleton';
 import { Product } from '@/types/product';
-import { Grid2x2, List } from 'lucide-react';
 
 interface ProductSectionProps {
   products: Product[];
@@ -13,7 +12,6 @@ interface ProductSectionProps {
 }
 
 const ProductSection = ({ products, isLoading, error }: ProductSectionProps) => {
-  const [view, setView] = useState<'grid' | 'list'>('grid');
   const [activeCategory, setActiveCategory] = useState<string>('all');
 
   // Extract unique categories from products
@@ -56,44 +54,20 @@ const ProductSection = ({ products, isLoading, error }: ProductSectionProps) => 
 
   return (
     <div>
-      <div className="flex flex-col md:flex-row justify-between items-center mb-8 space-y-4 md:space-y-0">
-        {/* Categories Filter */}
-        <div className="flex flex-wrap gap-2">
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setActiveCategory(category)}
-              className={`px-4 py-1 text-sm rounded-full border transition-all ${
-                activeCategory === category
-                  ? 'border-gold-600 bg-gold-600 text-white'
-                  : 'border-neutral-200 hover:border-gold-600 hover:text-gold-600'
-              }`}
-            >
-              {category.charAt(0).toUpperCase() + category.slice(1)}
-            </button>
-          ))}
-        </div>
-        
-        {/* View Toggles */}
-        <div className="flex items-center gap-2">
-          <span className="text-sm text-neutral-500">View:</span>
+      <div className="flex flex-wrap gap-2 mb-8">
+        {categories.map((category) => (
           <button
-            onClick={() => setView('grid')}
-            className={`p-2 rounded-md ${
-              view === 'grid' ? 'bg-neutral-100 text-gold-600' : 'text-neutral-400'
+            key={category}
+            onClick={() => setActiveCategory(category)}
+            className={`px-4 py-1 text-sm rounded-full border transition-all ${
+              activeCategory === category
+                ? 'border-gold-600 bg-gold-600 text-white'
+                : 'border-neutral-200 hover:border-gold-600 hover:text-gold-600'
             }`}
           >
-            <Grid2x2 size={18} />
+            {category.charAt(0).toUpperCase() + category.slice(1)}
           </button>
-          <button
-            onClick={() => setView('list')}
-            className={`p-2 rounded-md ${
-              view === 'list' ? 'bg-neutral-100 text-gold-600' : 'text-neutral-400'
-            }`}
-          >
-            <List size={18} />
-          </button>
-        </div>
+        ))}
       </div>
 
       {filteredProducts.length === 0 ? (
@@ -101,12 +75,7 @@ const ProductSection = ({ products, isLoading, error }: ProductSectionProps) => 
           <p className="text-neutral-500">No products found in this category.</p>
         </div>
       ) : (
-        <motion.div layout className={`
-          ${view === 'grid' 
-            ? 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6' 
-            : 'flex flex-col space-y-4'
-          }
-        `}>
+        <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {filteredProducts.map(product => (
             <motion.div
               layout
