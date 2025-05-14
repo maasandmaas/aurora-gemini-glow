@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -96,6 +99,41 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+  }
+
+  h1, h2, h3, h4, h5 {
+    @apply font-serif;
+  }
+  
+  /* Custom Shimmer Effect */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.8) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+
+  /* Dropdown styles */
+  .dropdown-menu {
+    @apply bg-white border border-neutral-200 shadow-lg rounded-md overflow-hidden z-50;
+    min-width: 200px;
+  }
+
+  .dropdown-item {
+    @apply px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-100 cursor-pointer transition-colors;
+  }
+  
+  /* Button styles */
+  .btn-gold {
+    @apply bg-gold-600 text-white hover:bg-gold-700 transition-colors;
+  }
+  
+  .btn-white {
+    @apply bg-white text-gold-600 border border-gold-600 hover:bg-gold-50 transition-colors;
   }
 }
